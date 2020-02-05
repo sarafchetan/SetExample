@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SetTest {
@@ -15,63 +16,31 @@ public class SetTest {
 
 
 	@Test 
-	public void isEmpty() { 
-		// assertNotNull(isnumsetempty);
-		assertNotNull(numset); 
-	}
+	public void checkEmptySet() throws Exception { 
 
+		assertNotNull(new TestClass().isempty(numset));
 
-	@Test 
-	public void isSetUnique() { 
-		int j; 
-		for (int i=0;i<numset.length;i++) {
-
-			for( j=0;j<i;j++) 
-				if(numset[i]==numset[j])
-					break; 
-			if(i==j)
-				
-				System.out.print(numset[i]+ " "); 
-		}
-	}
-
-
-	@Test 
-	public void isSetCompare() {
-
-		Arrays.sort(numsetA);
-		Arrays.sort(numsetB);
-		if(Arrays.equals(numsetA, numsetB)) {
-
-			System.out.println("Strings are same");
-		}else {
-
-			System.out.println("Strings are not same");
-		}
-
-
-	}
-	
-	
-	public boolean issetSubset(int numsetA[],int numsetB[], int m ,int n) {
-		int i,j;
-		for(i=0;i<n;i++)
-		{
-			for(j=0;j<m;j++)
-				if(numsetB[i]==numsetA[j])
-					break;
-			if(j==m)
-				return false;
-		}
-		return true;
 	}
 
 	@Test
-	public void setSubset() {
-		if(issetSubset(numsetA, numsetB, numsetA.length, numsetB.length))
-			System.out.println("Numset B is subset of Num Set A");
-		else
-			System.out.println("Numset B is not subset of Num Set A");
+	public void checkUniqueSet() throws Exception {
+		int[] expectedArray=new int[] {1,2,3,5,6,4,8,7,-1,-2,100,-1};
+
+
+		assertArrayEquals(expectedArray,new TestClass().unique(numset));
+
 	}
-	
+
+
+	@Test
+	public void checkCompareSet() throws Exception {
+		Assert.assertEquals(true, new TestClass().compare(numsetA, numsetB));
+	}
+
+	@Test
+	public void setSubset() throws Exception{
+		boolean result=new TestClass().issetSubset(numsetA, numsetB,numsetA.length, numsetB.length);
+		Assert.assertEquals(true, result);
+
+	}
 }
